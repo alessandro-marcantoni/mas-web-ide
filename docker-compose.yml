@@ -1,0 +1,47 @@
+version: "3.6"
+
+services:
+  database:
+    image: mongo:6.0
+    container_name: database
+    ports:
+      - "27017:27017"
+    networks:
+      - mas_organization_net
+
+  mas-organization-backend:
+    build:
+      dockerfile: Dockerfile
+      context: ./mas-organization-backend
+    container_name: mas-organization-backend
+    restart: always
+    environment:
+      - MONGO_CONNECTION_STRING=mongodb://database:27017
+    ports:
+      - "3000:3000"
+    networks:
+      - mas_organization_net
+    depends_on:
+      - database
+
+  mas-web-ide:
+    build:
+      dockerfile: Dockerfile
+      context: ./mas-web-based-ide-organisation
+      args:
+        - GENERATE_SOURCEMAP=false
+        - PORT=80
+        - PUBLIC_URL=/
+        - REACT_APP_BACKEND_URL=http://mas-organization-backend:3000
+    container_name: web-ide
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - mas_organization_net
+    depends_on:
+      - mas-organization-backend
+
+networks:
+  mas_organization_net:
+    driver: bridge

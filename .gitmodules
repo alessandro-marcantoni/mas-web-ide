@@ -1,0 +1,6 @@
+[submodule "mas-web-based-ide-organisation"]
+	path = mas-web-based-ide-organisation
+	url = https://github.com/alessandro-marcantoni/mas-web-based-ide-organisation.git
+[submodule "mas-organization-backend"]
+	path = mas-organization-backend
+	url = https://github.com/alessandro-marcantoni/mas-organization-backend.git
