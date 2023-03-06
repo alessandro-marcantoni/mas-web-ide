@@ -34,7 +34,7 @@ services:
         - GENERATE_SOURCEMAP=false
         - PORT=80
         - PUBLIC_URL=/
-        - REACT_APP_BACKEND_URL=http://mas-organization-backend:3000
+        - REACT_APP_BACKEND_URL=http://localhost:3000
     container_name: web-ide
     restart: always
     ports:
